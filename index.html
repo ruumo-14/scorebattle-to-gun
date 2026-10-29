@@ -7,12 +7,12 @@
 </head>
 <body><main class="page">
 <header><a class="brand" href="/">◎ SCORE BATTLE</a><span>ARCADE · AIM · HIT</span></header>
-<section class="intro"><p class="eyebrow">KEYBOARD ARCADE CHALLENGE</p><h1>狙いを定めて、<em>全ターゲットを撃破。</em></h1><p>画面下のプレイヤーは移動できない。1・2・3で左・中央・右の射撃レーンを選び、左右キーでそのレーン内の照準を動かしてスペースキーで発射。全10個の的を撃とう。</p></section>
+<section class="intro"><p class="eyebrow">KEYBOARD ARCADE CHALLENGE</p><h1>狙いを定めて、<em>全ターゲットを撃破。</em></h1><p>画面下のプレイヤーは移動できない。1・2・3で斜めに区切られた左・中央・右の射撃範囲を選び、左右キーで照準を動かしてスペースキーで発射。弾は的と同じ10発で、弾が画面端に着くとGAME OVER。</p></section>
 <section class="layout"><div class="game">
-<div class="hud"><div><small>SCORE</small><b id="scoreValue">000000</b></div><div><small>TARGETS</small><b id="targetsValue">0 / 10</b></div><div><small>TIME</small><b id="timeValue">00:00.0</b></div><div><small>HIT RATE</small><b id="accuracyValue">—</b></div></div>
+<div class="hud"><div><small>SCORE</small><b id="scoreValue">000000</b></div><div><small>TARGETS</small><b id="targetsValue">0 / 10</b></div><div><small>TIME</small><b id="timeValue">00:00.0</b></div><div><small>BALLS</small><b id="ammoValue">10 / 10</b></div><div><small>HIT RATE</small><b id="accuracyValue">—</b></div></div>
 <div class="canvas-wrap"><canvas id="gameCanvas" width="960" height="600" aria-label="ターゲットゲーム"></canvas><div class="overlay" id="overlay"><div><p class="eyebrow" id="overlayEyebrow">READY?</p><h2 id="overlayTitle">TARGET<br>TRIAL</h2><p id="overlayText">1・2・3で射撃レーンを選択。左右キーで照準を動かし、スペースキーで発射！</p><button id="startButton">START GAME →</button></div></div></div>
-<div class="controls"><span>← →　レーン内で照準を動かす</span><span>1 / 2 / 3　左・中央・右を選択</span><span>SPACE　発射</span><span>R　リスタート</span></div><p class="hint" id="gameHint">全10個のターゲットを撃破するとクリア。中心に近いほど高得点！</p></div>
-<aside><p class="eyebrow">GLOBAL RANKING</p><h2>TOP SCORES</h2><p id="leaderboardNote">みんなのベストスコア</p><ol id="scoreList"><li>ランキングを読み込み中…</li></ol><button class="secondary" id="refreshButton">ランキングを更新 ↻</button><hr><p class="eyebrow">HOW TO PLAY</p><p>01　1・2・3で左・中央・右のレーンを選ぶ</p><p>02　左右キーで照準を合わせ、スペースで発射</p><p>03　全10個を撃破して記録を登録</p></aside></section>
+<div class="controls"><span>← →　レーン内で照準を動かす</span><span>1 / 2 / 3　左・中央・右を選択</span><span>SPACE　発射</span><span>R　リスタート</span></div><p class="hint" id="gameHint">弾は全部で10発。画面端に弾が到達するとGAME OVER。全ての的を撃破してクリア！</p></div>
+<aside><p class="eyebrow">GLOBAL RANKING</p><h2>TOP SCORES</h2><p id="leaderboardNote">みんなのベストスコア</p><ol id="scoreList"><li>ランキングを読み込み中…</li></ol><button class="secondary" id="refreshButton">ランキングを更新 ↻</button><hr><p class="eyebrow">HOW TO PLAY</p><p>01　1・2・3で斜めの射撃範囲を選ぶ</p><p>02　左右キーで照準を合わせ、スペースで発射</p><p>03　10発を使い切る前に全ての的を撃破</p></aside></section>
 <footer>MADE FOR FRIENDLY COMPETITION <span>BEST AIM WINS.</span></footer>
 </main>
 <dialog id="resultDialog"><form id="resultForm"><p class="eyebrow">MISSION COMPLETE</p><h2>ALL TARGETS HIT!</h2><p>スコア：<b id="finalScore">0</b>　タイム：<b id="finalTime">00:00.0</b>　命中率：<b id="finalAccuracy">0%</b></p><label for="playerName">ランキングに載せる名前（16文字以内）</label><input id="playerName" maxlength="16" placeholder="プレイヤー名" required><p id="formMessage" aria-live="polite"></p><div class="actions"><button type="button" class="secondary" id="skipSaveButton">登録せず終了</button><button type="submit" id="saveScoreButton">スコアを登録 →</button></div></form></dialog>
