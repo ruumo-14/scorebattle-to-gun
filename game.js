@@ -1,11 +1,11 @@
 'use strict';
 (() => {
 const $=id=>document.getElementById(id), canvas=$('gameCanvas'),ctx=canvas.getContext('2d'),overlay=$('overlay'),dialog=$('resultDialog');
-const W=canvas.width,H=canvas.height,N=10,MAX_LEVEL=5, shooter={x:W/2,y:H-38},AIM_Y=H*0.42;let lane=1,level=1,aim={x:W/2,y:AIM_Y},laneAimX=[W/6,W/2,W*5/6],keys=new Set(),targets=[],bullets=[],sparks=[],running=false,ended=false,startAt=0,elapsed=0,last=0,shots=0,hits=0,score=0,result=null,lastShot=0,gameOverReason='';
+const W=canvas.width,H=canvas.height,N=5,MAX_LEVEL=5, shooter={x:W/2,y:H-38},AIM_Y=H*0.42;let lane=1,level=1,aim={x:W/2,y:AIM_Y},laneAimX=[W/6,W/2,W*5/6],keys=new Set(),targets=[],bullets=[],sparks=[],running=false,ended=false,startAt=0,elapsed=0,last=0,shots=0,hits=0,score=0,result=null,lastShot=0,gameOverReason='';
 function boundaryX(topX,y){return shooter.x+(topX-shooter.x)*(shooter.y-y)/shooter.y;}
 function laneBounds(i){const left=boundaryX(W*0.30,AIM_Y),right=boundaryX(W*0.70,AIM_Y);return i===0?[18,left-8]:i===1?[left+8,right-8]:[right+8,W-18];}
 function selectLane(i){lane=i;const [lo,hi]=laneBounds(lane);aim.x=Math.max(lo,Math.min(hi,laneAimX[lane]));aim.y=AIM_Y;}
-function targetCount(){return level===1?5:N;}
+function targetCount(){return N;}
 const rand=(a,b)=>a+Math.random()*(b-a),fmt=ms=>{let s=Math.max(0,ms)/1000;return String(Math.floor(s/60)).padStart(2,'0')+':'+String(Math.floor(s%60)).padStart(2,'0')+'.'+Math.floor(s%1*10)};
 function makeTargets(){targets=[];const zones=[[130,100,220,190],[335,90,430,180],[540,90,640,185],[745,105,835,190],[65,245,170,330],[270,220,365,310],[475,235,570,320],[690,220,785,310],[165,390,255,465],[605,385,700,465]];zones.slice(0,targetCount()).forEach((z,i)=>targets.push({x:rand(z[0],z[2]),y:rand(z[1],z[3]),r:rand(17,24),alive:true,pulse:rand(0,6),i}));}
 function hud(){ $('scoreValue').textContent=String(score).padStart(6,'0');$('targetsValue').textContent='Lv.'+level+' · '+targets.filter(t=>!t.alive).length+' / '+targetCount();$('timeValue').textContent=fmt(elapsed);$('accuracyValue').textContent=shots?Math.round(hits/shots*100)+'%':'—';const ammo=$('ammoValue');if(ammo)ammo.textContent=Math.max(0,targetCount()-shots)+' / '+targetCount();}
