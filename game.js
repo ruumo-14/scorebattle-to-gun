@@ -1,7 +1,7 @@
 'use strict';
 (() => {
 const $=id=>document.getElementById(id), canvas=$('gameCanvas'),ctx=canvas.getContext('2d'),overlay=$('overlay'),dialog=$('resultDialog');
-const W=canvas.width,H=canvas.height,N=5,MAX_LEVEL=5, shooter={x:W/2,y:H-38},AIM_Y=H*0.42;let lane=1,level=1,aim={x:W/2,y:AIM_Y},laneAimX=[W/6,W/2,W*5/6],keys=new Set(),targets=[],bullets=[],sparks=[],running=false,ended=false,startAt=0,elapsed=0,last=0,shots=0,hits=0,score=0,result=null,lastShot=0,gameOverReason='';
+const W=canvas.width,H=canvas.height,N=5,MAX_LEVEL=3, shooter={x:W/2,y:H-38},AIM_Y=H*0.42;let lane=1,level=1,aim={x:W/2,y:AIM_Y},laneAimX=[W/6,W/2,W*5/6],keys=new Set(),targets=[],bullets=[],sparks=[],running=false,ended=false,startAt=0,elapsed=0,last=0,shots=0,hits=0,score=0,result=null,lastShot=0,gameOverReason='';
 function boundaryX(topX,y){return shooter.x+(topX-shooter.x)*(shooter.y-y)/shooter.y;}
 function laneBounds(i){const left=boundaryX(W*0.30,AIM_Y),right=boundaryX(W*0.70,AIM_Y);return i===0?[18,left-8]:i===1?[left+8,right-8]:[right+8,W-18];}
 function selectLane(i){lane=i;const [lo,hi]=laneBounds(lane);aim.x=Math.max(lo,Math.min(hi,laneAimX[lane]));aim.y=AIM_Y;}
